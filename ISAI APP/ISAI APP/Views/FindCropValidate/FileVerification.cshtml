@@ -1,6 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "FileVerification";
+                /**/
+
+                /**/
+
+                ViewBag.Title = "FileVerification";
 }
 
 <h2>Verificación de firma en INE, desde imagen adjuntada.</h2>
@@ -16,17 +20,39 @@
             <a class="btn btn-info col-md-12" href="/FindCropValidate/">Volver</a>
         </div>
     </div>
+    <div class="col-md-4 container">
+        <button class="btn btn-outline-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home")</button>
+    </div>
 }
 else
 {
     <div class="row">
-        <div class="col-md-4">
-            <strong> Imagen original. </strong>
-            <img src="~/Content/imagesUploads/@ViewBag.Url2" alt="Credencial original" height="250" width="350">
+
+        <div class="col-md-6">
+            <div class="card" style="width: 26rem;">
+                <img src="~/Content/imagesUploads/@ViewBag.Url2" alt="Credencial original" height="210" width="100%">
+                <div class="card-body">
+                    <h5 class="card-title"><strong> Imagen original. </strong></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-            <strong> Imagen encontrada en imagen original. </strong>
-            <img src="~/Content/imagesCrop/@ViewBag.Url" alt="Credencial recortada">
+        <div class="col-md-6">
+            <div class="card" style="width: 26rem;">
+                <img src="~/Content/imagesCrop/@ViewBag.Url" height="210" width="100%" alt="Credencial recortada">
+                <div class="card-body">
+                    <h5 class="card-title"><strong> Imagen encontrada en imagen original. </strong></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
         </div>
+    </div>
+    <br />
+    <div class="col-md-4 container">
+        <button class="btn btn-outline-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home")</button>
+        <button class="btn btn-outline-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home")</button>
+
     </div>
 }
