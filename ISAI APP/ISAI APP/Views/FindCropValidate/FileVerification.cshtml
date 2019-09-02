@@ -1,10 +1,10 @@
 ﻿
 @{
-                /**/
+    /**/
 
-                /**/
+    /**/
 
-                ViewBag.Title = "FileVerification";
+    ViewBag.Title = "FileVerification";
 }
 
 <h2>Verificación de firma en INE, desde imagen adjuntada.</h2>
@@ -20,15 +20,12 @@
             <a class="btn btn-info col-md-12" href="/FindCropValidate/">Volver</a>
         </div>
     </div>
-    <div class="col-md-4 container">
-        <button class="btn btn-outline-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home")</button>
-    </div>
 }
 else
 {
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card" style="width: 26rem;">
                 <img src="~/Content/imagesUploads/@ViewBag.Url2" alt="Credencial original" height="210" width="100%">
                 <div class="card-body">
@@ -38,7 +35,8 @@ else
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <hr />
+        <div class="col-md-4">
             <div class="card" style="width: 26rem;">
                 <img src="~/Content/imagesCrop/@ViewBag.Url" height="210" width="100%" alt="Credencial recortada">
                 <div class="card-body">
@@ -50,9 +48,13 @@ else
         </div>
     </div>
     <br />
-    <div class="col-md-4 container">
-        <button class="btn btn-outline-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home")</button>
-        <button class="btn btn-outline-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home")</button>
+        <div class="col-md-6 container">
+            <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
+        </div>
 
-    </div>
+        <br />
+
+        <div class="col-md-6 container">
+            <button class="btn btn-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home", null, new { @class = "my-class" })</button>
+        </div>
 }
