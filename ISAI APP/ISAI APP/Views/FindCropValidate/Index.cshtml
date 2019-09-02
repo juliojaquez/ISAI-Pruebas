@@ -35,10 +35,14 @@
             }
         </section>
     </div>
-    <div class="col-md-6 container">
-        <button class="btn btn-outline-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home")</button>
-        <button class="btn btn-outline-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home")</button>
+</div>
+<div class="col-md-6">
+    <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
+</div>
 
-    </div>
+<br />
+
+<div class="col-md-6">
+    <button class="btn btn-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home", null, new { @class = "my-class" })</button>
 </div>
 
