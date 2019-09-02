@@ -21,7 +21,7 @@ namespace ISAI_APP.Controllers
             System.Drawing.Bitmap bmpPostedImage = new System.Drawing.Bitmap(file.InputStream);
             var galleryDirectoryPath1 = Server.MapPath("~/Content/imagesUploads/");
             bmpPostedImage.Save(galleryDirectoryPath1 + file.FileName);
-
+            
             var imgToSave = FindAndCrop.FindCrop(bmpPostedImage);
 
 
