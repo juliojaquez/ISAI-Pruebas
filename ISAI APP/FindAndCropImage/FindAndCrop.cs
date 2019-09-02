@@ -5,6 +5,7 @@ using Emgu.CV.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,13 @@ namespace FindAndCropImage
     {
         public static Bitmap FindCrop(Bitmap img)
         {
+            string imagesDirectory = AppDomain.CurrentDomain.BaseDirectory;
             Image<Bgr, byte> source = new Image<Bgr, byte>(img); // Image B
             //Image OriginalImage = Image.FromFile(@"C:\Users\Julio.Jaquez\Desktop\imagenes\ife-1.jpg");
 
-            Image<Bgr, byte> template = new Image<Bgr, byte>(@"C:\Users\Julio.Jaquez\Desktop\imagenes\area_firma3.jpg"); // Image A
+            string rutaTemplate = imagesDirectory + "Content\\templates\\area_firma3.jpg";
+
+            Image<Bgr, byte> template = new Image<Bgr, byte>(rutaTemplate); // Image A
             //Image<Bgr, byte> wat = new Image<Bgr, byte>(@"C:\Users\Julio.Jaquez\Desktop\detailimage\periodico.jpg");
             Image<Bgr, byte> imageToShow = source.Copy();
             Image<Bgr, byte> imagenFirma = null;
