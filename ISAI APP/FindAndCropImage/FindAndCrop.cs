@@ -15,7 +15,7 @@ namespace FindAndCropImage
     {
         public static void FindCrop()
         {
-            Image<Bgr, byte> source = new Image<Bgr, byte>(@"C:\Users\Julio.Jaquez\Desktop\imagenes\ife-1.jpg"); // Image B
+            Image<Bgr, byte> source = new Image<Bgr, byte>(@"C:\Users\user\Downloads\aaaaa.jpg"); // Image B
             Image OriginalImage = Image.FromFile(@"C:\Users\Julio.Jaquez\Desktop\imagenes\ife-1.jpg");
 
             Image<Bgr, byte> template = new Image<Bgr, byte>(@"C:\Users\Julio.Jaquez\Desktop\imagenes\area_firma3.jpg"); // Image A

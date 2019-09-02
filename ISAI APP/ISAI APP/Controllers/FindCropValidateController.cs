@@ -1,4 +1,5 @@
-﻿using FindAndCropImage;
+﻿//using FindAndCropImage;
+using FindAndCropImage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace ISAI_APP.Controllers
         // GET: FindCropValidate
         public ActionResult Index()
         {
+            
             FindAndCrop.FindCrop();
             return View();
         }
