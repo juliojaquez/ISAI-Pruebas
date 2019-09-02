@@ -32,7 +32,7 @@ namespace ISAI_APP.Controllers
 
         public string Parametros(string name, string firstName, string lastName, string curp, string fechaNacimiento)
         {
-            string Resultado = name + 'ss ' + firstName + ' ' + lastName + ' ' + ' ' + curp + ' ' + fechaNacimiento;
+            string Resultado = name + ' ' + firstName + ' ' + lastName + ' ' + ' ' + curp + ' ' + fechaNacimiento;
 
             return Resultado;
         }
