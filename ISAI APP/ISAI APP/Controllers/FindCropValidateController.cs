@@ -12,13 +12,28 @@ namespace ISAI_APP.Controllers
         // GET: FindCropValidate
         public ActionResult Index()
         {
-            FindAndCrop.FindCrop();
             return View();
         }
 
-
-        public ActionResult FileVerification()
+        [HttpPost]
+        public ActionResult FileVerification(HttpPostedFileBase file)
         {
+            System.Drawing.Bitmap bmpPostedImage = new System.Drawing.Bitmap(file.InputStream);
+            var galleryDirectoryPath1 = Server.MapPath("~/Content/imagesUploads/");
+            bmpPostedImage.Save(galleryDirectoryPath1 + file.FileName);
+
+            var imgToSave = FindAndCrop.FindCrop(bmpPostedImage);
+
+
+            var galleryDirectoryPath = Server.MapPath("~/Content/imagesCrop/");
+            string nombreImagen = "imagen" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
+            imgToSave.Save(galleryDirectoryPath + nombreImagen);
+
+            ViewBag.Url = nombreImagen;
+            ViewBag.Url2 = file.FileName;
+
+
+
             return View();
         }
     }
