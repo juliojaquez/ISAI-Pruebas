@@ -24,16 +24,19 @@ namespace ISAI_APP.Controllers
 
             var imgToSave = FindAndCrop.FindCrop(bmpPostedImage);
 
+            if (imgToSave != null)
+            {
+                var galleryDirectoryPath = Server.MapPath("~/Content/imagesCrop/");
+                string nombreImagen = "imagen" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
+                imgToSave.Save(galleryDirectoryPath + nombreImagen);
 
-            var galleryDirectoryPath = Server.MapPath("~/Content/imagesCrop/");
-            string nombreImagen = "imagen" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
-            imgToSave.Save(galleryDirectoryPath + nombreImagen);
-
-            ViewBag.Url = nombreImagen;
-            ViewBag.Url2 = file.FileName;
-
-
-
+                ViewBag.Url = nombreImagen;
+                ViewBag.Url2 = file.FileName;
+            }
+            else
+            {
+                ViewBag.IsNull = "true";
+            }
             return View();
         }
     }

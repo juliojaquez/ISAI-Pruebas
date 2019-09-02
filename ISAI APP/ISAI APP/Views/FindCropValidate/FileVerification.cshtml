@@ -3,16 +3,30 @@
     ViewBag.Title = "FileVerification";
 }
 
-<h2>FileVerification</h2>
+<h2>Verificación de firma en INE, desde imagen adjuntada.</h2>
 <hr />
 
-<div class="row">
-    <div class="col-md-4">
-        <strong> Imagen original. </strong>
-        <img src="~/Content/imagesUploads/@ViewBag.Url2" alt="Credencial original" height="250" width="350">
+@if (ViewBag.isNull == "true")
+{
+    <div class="row">
+        <h4><span class="badge badge-secondary">No se encontró la firma en la INE, favor de adjuntar una foto con mayor claridad.</span></h4>
     </div>
-    <div class="col-md-4">
-        <strong> Imagen encontrada en imagen original. </strong>
-        <img src="~/Content/imagesCrop/@ViewBag.Url" alt="Credencial recortada">
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-info col-md-12" href="/FindCropValidate/">Volver</a>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <strong> Imagen original. </strong>
+            <img src="~/Content/imagesUploads/@ViewBag.Url2" alt="Credencial original" height="250" width="350">
+        </div>
+        <div class="col-md-4">
+            <strong> Imagen encontrada en imagen original. </strong>
+            <img src="~/Content/imagesCrop/@ViewBag.Url" alt="Credencial recortada">
+        </div>
+    </div>
+}
