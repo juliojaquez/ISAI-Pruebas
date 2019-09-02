@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\documents\" />
     <Folder Include="Content\imagesUploads\" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +200,10 @@
     <ProjectReference Include="..\FindAndCropImage\FindAndCropImage.csproj">
       <Project>{CE4E08AE-2936-43C1-93A1-045E864D702D}</Project>
       <Name>FindAndCropImage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryScore\LibraryScore.csproj">
+      <Project>{EEA1581A-F7C7-473C-96C5-F626DB406377}</Project>
+      <Name>LibraryScore</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

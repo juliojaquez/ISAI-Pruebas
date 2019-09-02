@@ -1,4 +1,5 @@
 ﻿using FindAndCropImage;
+using LibraryScore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,24 @@ namespace ISAI_APP.Controllers
 
                 ViewBag.Url = nombreImagen;
                 ViewBag.Url2 = file.FileName;
+
+                var Lista = Score(nombreImagen);
+
+                ViewBag.Lista = Lista;
             }
             else
             {
                 ViewBag.IsNull = "true";
             }
             return View();
+        }
+
+        public List<WeightedImages> Score(string nombreImagen)
+        {
+            ScoreImg score = new ScoreImg();
+            var objeto = score.ProcessFolder(nombreImagen);
+
+            return objeto;
         }
     }
 }

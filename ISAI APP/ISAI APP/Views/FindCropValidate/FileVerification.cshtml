@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "FileVerification";
 }
 
@@ -27,6 +26,17 @@ else
         <div class="col-md-4">
             <strong> Imagen encontrada en imagen original. </strong>
             <img src="~/Content/imagesCrop/@ViewBag.Url" alt="Credencial recortada">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var item in ViewBag.Lista)
+            {
+                <tr>
+                    <td>@item.ImagePath</td>
+                    <td>@item.Score</td>
+                </tr>
+            }
         </div>
     </div>
 }
