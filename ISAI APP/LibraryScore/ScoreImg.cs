@@ -3,6 +3,7 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace LibraryScore
         public void ProcessImage(string completeImage, string detailImage)
         {
             if (completeImage == detailImage) return;
-
+            string fileName = Path.GetFileName(completeImage);
             try
             {
                 long score;
@@ -51,8 +52,9 @@ namespace LibraryScore
                         DrawMatches.FindMatch(modelImage, observedImage, out matchTime, out modelKeyPoints, out observedKeyPoints, matches,
                            out mask, out homography, out score);
                     }
+                    
 
-                    imgList.Add(new WeightedImages() { ImagePath = completeImage, Score = score });
+                    imgList.Add(new WeightedImages() { ImagePath = fileName, Score = score });
                 }
             }
             catch (Exception e)
