@@ -1,4 +1,5 @@
 ﻿using FindAndCropImage;
+using ISAI_APP.OCR;
 using LibraryScore;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace ISAI_APP.Controllers
             System.Drawing.Bitmap bmpPostedImage = new System.Drawing.Bitmap(file.InputStream);
             var galleryDirectoryPath1 = Server.MapPath("~/Content/imagesUploads/");
             bmpPostedImage.Save(galleryDirectoryPath1 + file.FileName);
-            
+
             var imgToSave = FindAndCrop.FindCrop(bmpPostedImage);
 
             if (imgToSave != null)
@@ -51,6 +52,11 @@ namespace ISAI_APP.Controllers
             var objeto = score.ProcessFolder(nombreImagen);
 
             return objeto;
+        }
+
+        public void OCR()
+        {
+            string texto = OCRUtil.GetText();
         }
     }
 }
