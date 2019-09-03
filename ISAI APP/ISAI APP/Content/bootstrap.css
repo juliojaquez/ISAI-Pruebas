@@ -37,23 +37,6 @@
 
 *,
 *::before,
-a.my-class: {
-    color: #000000
-}
-
-    a.my-class:active {
-        color: #FFFFFF
-    }
-
-    a.my-class:link {
-        color: #FFFFFF
-    }
-
-    a.my-class:visited {
-        color: #FFFFFF
-    }
-
-
 *::after {
   box-sizing: border-box;
 }

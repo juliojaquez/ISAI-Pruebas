@@ -1,48 +1,56 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<form method="post">
-    <div class="col-md-12 container">
-        Name: <input id="txtName" name" type="text" class="container" placeholder="Nombre" title="Nombre" value="Ulises" />
-    </div>
-    <div class="col-md-12 container">
-        FirstName: <input id="txtFirstName" name="firstName" type="text" class="container" placeholder="Apellido Materno" title="Apellido Paterno" value="Gonzalez" />
-    </div>
-    <div class="col-md-12 container">
-        LastName: <input id="txtLastName" name="lastName" type="text" class="container" placeholder="Apellido Paterno" title="Apellido Materno" value="Juarez" />
-    </div>
 
-    <div class="col-md-12 container">
-        CURP: <input id="txtCURP" name="curp" type="text" class="container" placeholder="CURP" title="CURP" value="GOJU950519" />
-    </div>
-    <div class="col-md-12 container">
-        DateTime: <input id="txtFechaNacimiento" name="fechaNacimiento" type="text" class="container" title="Fecha de Nacimiento" value="19-05-2019" />
-        <div id="Console"></div>
-    </div>
-    <div class="col-md-12 container">
-        <button class="btn btn-outline-dark container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "FindCropValidate")</button>
-    </div>
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div class="form-group">
+                <label for="txtName">Name:</label>
+                <input id="txtName" type="text" class="container" placeholder="Nombre" title="Nombre" value="Ulises" />
+            </div>
+            <div class="form-group">
+                <label for="txtName">FirstName::</label>
+                <input id="txtFirstName" name="firstName" type="text" class="container" placeholder="Apellido Materno" title="Apellido Paterno" value="Gonzalez" />
+            </div>
+            <div class="form-group">
+                LastName: <input id="txtLastName" name="lastName" type="text" class="container" placeholder="Apellido Paterno" title="Apellido Materno" value="Juarez" />
+            </div>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#Transacción</th>
-                <th scope="col">Tipo Documento</th>
-                <th scope="col">Documento Cliente</th>
-                <th scope="col">Porcentaje</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="table-primary">
-                <th scope="row">1</th>
-                <td>INE</td>
-                <td>INE ESCANEADA.JPG</td>
-                <td>78%</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="form-group">
+                CURP: <input id="txtCURP" name="curp" type="text" class="container" placeholder="CURP" title="CURP" value="GOJU950519" />
+            </div>
+            <div class="form-group">
+                DateTime: <input id="txtFechaNacimiento" name="fechaNacimiento" type="text" class="container" title="Fecha de Nacimiento" value="19-05-2019" />
+                <div id="Console"></div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-dark container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "FindCropValidate")</button>
+            </div>
 
-</form>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#Transacción</th>
+                        <th scope="col">Tipo Documento</th>
+                        <th scope="col">Documento Cliente</th>
+                        <th scope="col">Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-primary">
+                        <th scope="row">1</th>
+                        <td>INE</td>
+                        <td>INE ESCANEADA.JPG</td>
+                        <td>78%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </form>
+    </div>
+</div>
 <h2>
     <!--Resultado: name: @ViewBag.name, firstName: @ViewBag.FirstName, lastName: @ViewBag.LastName, CURP: @ViewBag.CURP, fechaNacimiento: @ViewBag.FechaNacimiento-->
 </h2>
@@ -80,7 +88,7 @@ window.onload = function() {
             },
             error: function (er) {
                 alert("error");
-           
+
             }//
 
         });
