@@ -12,10 +12,8 @@
         <section>
             @using (Html.BeginForm("FileVerification", "FindCropValidate", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-
                 <div>
                     <br />
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-8">
@@ -36,13 +34,9 @@
         </section>
     </div>
 </div>
-<div class="col-md-6">
-    <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
+
+<div class="row" align="center">
+    <div class="col-5">
+        <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
+    </div>
 </div>
-
-<br />
-
-<div class="col-md-6">
-    <button class="btn btn-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home", null, new { @class = "my-class" })</button>
-</div>
-

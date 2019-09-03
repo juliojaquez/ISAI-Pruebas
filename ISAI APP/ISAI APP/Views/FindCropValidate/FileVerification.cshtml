@@ -41,30 +41,42 @@ else
     </div>
     <div class="row">
         <div class="col-md-12">
-
-            @foreach (var item in ViewBag.Lista)
-            {
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#Transacción</th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">Porcentaje</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table-primary">
-                            <th scope="row">1</th>
-                            <td></td>
+            <table class="table table-striped">
+                <thead>
+                    <tr align="center" |>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.Lista)
+                    {
+                        <tr class="table-primary" align="center">
                             <td>
-                                <img src="~/Content/documents" width="100%" height="15" alt="Credencial original"/>
+                                <img src="~/Content/documents/@item.ImagePath" width="130" height="145" alt="Credencial original" />
                             </td>
                             <td>@item.Score</td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
 
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
         </div>
     </div>
+
+    <div class="row" align="center">
+        <div class="col-5 container">
+            <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
+        </div>
+
+        <div class="col-5 container">
+            <button class="btn btn-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home", null, new { @class = "my-class" })</button>
+        </div>
+    </div>
+
+
+}@{
+    ViewBag.Title = "FileVerification";
 }
+
