@@ -33,7 +33,7 @@ namespace ISAI_APP.Controllers
         public string Parametros(string name, string firstName, string lastName, string curp, string fechaNacimiento)
         {
             string Resultado = name + ' ' + firstName + ' ' + lastName + ' ' + ' ' + curp + ' ' + fechaNacimiento;
-
+            ViewBag.Result = Resultado;
             return Resultado;
         }
 

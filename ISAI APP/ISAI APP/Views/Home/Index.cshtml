@@ -28,33 +28,13 @@
                 <button class="btn btn-outline-dark container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "FindCropValidate")</button>
             </div>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#Transacción</th>
-                        <th scope="col">Tipo Documento</th>
-                        <th scope="col">Documento Cliente</th>
-                        <th scope="col">Porcentaje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-primary">
-                        <th scope="row">1</th>
-                        <td>INE</td>
-                        <td>INE ESCANEADA.JPG</td>
-                        <td>78%</td>
-                    </tr>
-                </tbody>
-            </table>
-
-
         </form>
     </div>
 </div>
 <h2>
     <!--Resultado: name: @ViewBag.name, firstName: @ViewBag.FirstName, lastName: @ViewBag.LastName, CURP: @ViewBag.CURP, fechaNacimiento: @ViewBag.FechaNacimiento-->
 </h2>
-
+<h3>@ViewBag.Resultado</h3>
 <script>
 function AddZero(num) {
     return (num >= 0 && num < 10) ? "0" + num : num + "";
