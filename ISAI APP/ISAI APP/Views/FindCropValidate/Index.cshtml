@@ -10,29 +10,66 @@
 <div class="row">
     <div class="col-md-6 col-md-push-2">
         <section>
-            @using (Html.BeginForm("FileVerification", "FindCropValidate", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+            @using (Ajax.BeginForm("FileVerification", "FindCropValidate", null, new AjaxOptions()
+            {
+                LoadingElementId = "Loading"
+            }, new { enctype = "multipart/form-data" }))
             {
                 <div>
                     <br />
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="col-md-8">
-                                <div class="input-group">
-                                    <h4>Ingresa INE</h4>
+
+                            <div class="input-group">
+                                <h4>Ingresa INE</h4>
+                            </div>
+                            <div class="row form-group">
+                                <input type="file" id="idFile" name="file" class="form-control">
+                                <hr />
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 form-group">
+                                    <input type="radio" id="INE" name="choose" value="INE" checked />
+                                    <label for="INE"><strong>INE (buscar firma en reverso)</strong></label>
                                 </div>
-                                <div class="row form-group">
-                                    <input type="file" name="file" class="form-control">
-                                    <hr />
-                                    <input type="submit" class="btn btn-danger" value="Verificar" />
+                                <div class="col-lg-6 form-group">
+                                    <input type="radio" id="DOCUMENTO" name="choose" value="DOCUMENTO" />
+                                    <label for="DOCUMENTO"><strong>DOCUMENTO (buscar sello del escudo mexicano)</strong></label>
                                 </div>
                             </div>
+                            <div class="row form-group">
+
+                                <input type="submit" id="idButton" class="btn btn-danger" value="Verificar" />
+
+
+                                <div id="Loading" class="col-md-2" style="display: none;">
+                                    <img src="~/Content/ImagesApp/loading.gif" width="50" height="50" alt="Loading...">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             }
+
         </section>
     </div>
 </div>
+
+
+<script>
+    $("#idButton").click(function (e) {
+        if ($('#idFile').get(0).files.length === 0) {
+            alert('Favor de adjuntar archivo válido');
+            e.preventDefault(); // Cancel the submit
+            return false;
+        } else {
+            $('#Loading').show();
+        }
+    });
+</script>
 
 <div class="row" align="center">
     <div class="col-5">

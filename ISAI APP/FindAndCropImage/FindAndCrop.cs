@@ -14,13 +14,25 @@ namespace FindAndCropImage
 {
     public static class FindAndCrop
     {
-        public static Bitmap FindCrop(Bitmap img)
+        public static Bitmap FindCrop(Bitmap img, string choose)
         {
+            string imagenTemplate = string.Empty;
+            double rangoEfectividad = 0.0;
+            if (choose == "INE")
+            {
+                imagenTemplate = "area_firma3.jpg";
+                rangoEfectividad = 0.5;
+            }
+            else if (choose == "DOCUMENTO")
+            {
+                imagenTemplate = "escudo.jpg";
+                rangoEfectividad = 0.1;
+            }
             string imagesDirectory = AppDomain.CurrentDomain.BaseDirectory;
             Image<Bgr, byte> source = new Image<Bgr, byte>(img); // Image B
             //Image OriginalImage = Image.FromFile(@"C:\Users\Julio.Jaquez\Desktop\imagenes\ife-1.jpg");
 
-            string rutaTemplate = imagesDirectory + "Content\\templates\\Escudo.jpg";
+            string rutaTemplate = imagesDirectory + "Content\\templates\\" + imagenTemplate;
 
             Image<Bgr, byte> template = new Image<Bgr, byte>(rutaTemplate); // Image A
             //Image<Bgr, byte> wat = new Image<Bgr, byte>(@"C:\Users\Julio.Jaquez\Desktop\detailimage\periodico.jpg");
@@ -36,7 +48,7 @@ namespace FindAndCropImage
                 result.MinMax(out minValues, out maxValues, out minLocations, out maxLocations);
 
                 // You can try different values of the threshold. I guess somewhere between 0.75 and 0.95 would be good.
-                if (maxValues[0] >= 0.1)
+                if (maxValues[0] >= rangoEfectividad)
                 {
                     // This is a match. Do something with it, for example draw a rectangle around it.
                     Rectangle match = new Rectangle(maxLocations[0], template.Size);
