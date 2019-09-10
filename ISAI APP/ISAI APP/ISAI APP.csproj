@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FindCropValidateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OCRController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -199,6 +200,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\FindCropValidate\Index.cshtml" />
     <Content Include="Views\FindCropValidate\FileVerification.cshtml" />
+    <Content Include="Views\OCR\OCR.cshtml" />
+    <Content Include="Views\OCR\OCRVerification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
