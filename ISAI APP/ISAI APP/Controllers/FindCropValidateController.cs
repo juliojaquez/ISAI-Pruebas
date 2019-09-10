@@ -2,12 +2,17 @@
 using ISAI_APP.Models;
 using ISAI_APP.OCR;
 using LibraryScore;
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+
 using System.Linq;
+
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace ISAI_APP.Controllers
 {
@@ -65,6 +70,7 @@ namespace ISAI_APP.Controllers
 
             try
             {
+                //FIND & CROP
                 var imgToSave = FindAndCrop.FindCrop(bmpPostedImage, choose);
                 objLog.Error = "La imagen se cortó chingón";
                 DataBase.Logs.Add(objLog);
@@ -81,17 +87,18 @@ namespace ISAI_APP.Controllers
 
                     try
                     {
+                        //SCORE
                         var Lista = Score(nombreImagen);
                         objLog.Error = "Todo bien con el Score";
                         ViewBag.Lista = Lista;
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         objLog.Error = "Error sacando Score";
                         DataBase.Logs.Add(objLog);
                         DataBase.SaveChanges();
                     }
-                    
+
                 }
                 else
                 {
@@ -150,9 +157,12 @@ namespace ISAI_APP.Controllers
             return objeto;
         }
 
-        public void OCR()
+        public async Task<JsonResult> OCR(HttpPostedFileBase file)
         {
-            string texto = OCRUtil.GetText();
+            List<string> palabras = await OCRUtil.GetText(file);
+
+            return Json(palabras,JsonRequestBehavior.AllowGet);
         }
+
     }
 }

@@ -21,7 +21,7 @@ namespace FindAndCropImage
             if (choose == "INE")
             {
                 imagenTemplate = "area_firma3.jpg";
-                rangoEfectividad = 0.5;
+                rangoEfectividad = 0.2;
             }
             else if (choose == "DOCUMENTO")
             {
