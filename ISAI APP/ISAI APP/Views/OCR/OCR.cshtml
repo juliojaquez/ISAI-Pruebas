@@ -99,25 +99,18 @@
                 alert("error");
             }//
         });//ajax
-
-
-
         }
     });
 
 
-    function OnSuccess(data) {
-        alert('HTTP Status Code: ' + data);
-    }
-    function OnFailure(data) {
-        alert('HTTP Status Code: ' + data);
-    }
+    void function llenarFormulario() {
 
+    };
 
 </script>
 
 <div class="row" align="center">
     <div class="col-5">
-        <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
+        <a href="/Home" class="btn btn-danger">Regresar</a>
     </div>
 </div>
