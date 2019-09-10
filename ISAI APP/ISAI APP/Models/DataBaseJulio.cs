@@ -13,6 +13,7 @@ namespace ISAI_APP.Models
         }
 
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<INEData> INELogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
