@@ -156,13 +156,5 @@ namespace ISAI_APP.Controllers
 
             return objeto;
         }
-
-        public async Task<JsonResult> OCR(HttpPostedFileBase file)
-        {
-            List<string> palabras = await OCRUtil.GetText(file);
-
-            return Json(palabras,JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

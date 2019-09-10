@@ -201,7 +201,6 @@
     <Content Include="Views\FindCropValidate\Index.cshtml" />
     <Content Include="Views\FindCropValidate\FileVerification.cshtml" />
     <Content Include="Views\OCR\OCR.cshtml" />
-    <Content Include="Views\OCR\OCRVerification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

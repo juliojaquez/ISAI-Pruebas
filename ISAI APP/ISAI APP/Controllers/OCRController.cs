@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ISAI_APP.OCR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,9 +16,12 @@ namespace ISAI_APP.Controllers
             return View();
         }
 
-        public ActionResult OCRVerification()
+        public async Task<ActionResult> OCRVerification(HttpPostedFileBase file)
         {
-            return View();
+            List<string> palabras = await OCRUtil.GetText(file);
+
+            return Json(palabras, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

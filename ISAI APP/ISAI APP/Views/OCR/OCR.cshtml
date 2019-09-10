@@ -4,19 +4,6 @@
 }
 
 <div class="card text-center">
-    <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-        </ul>
-    </div>
     <div class="card-body">
         <h5 class="card-title">Validar Documento (OCR)</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -25,17 +12,14 @@
         <div class="col-md-10 col-md-push-2">
             <section>
 
-                @using (Ajax.BeginForm("OCRVerification", "OCR", null, new AjaxOptions()
-                {
-                    LoadingElementId = "Loading"
-                }, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("OCRVerification", "OCR", FormMethod.Post, new { id = "fileUploadForm" }))
                 {
                     <div>
                         <br />
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row form-group">
-                                    <input type="file" id="idFileDocumento" name="fileDocumento" class="form-control">
+                                    <input type="file" id="idFileDocumento" name="file" class="form-control">
                                     <hr />
                                 </div>
                                 <div class="row form-group">
@@ -50,21 +34,80 @@
                     </div>
                 }
             </section>
+            <div class="row">
+                <div class="col-lg-12">
+                    <textarea id="txtArea" name="textarea" class="container" rows="15" cols="100">...</textarea>
+                </div>
+            </div>
         </div>
-
+        
     </div>
+    
 </div>
+
 
 <script>
     $("#idButton").click(function (e) {
-        if ($('#idFile').get(0).files.length === 0) {
+        if ($('#idFileDocumento').get(0).files.length === 0) {
             alert('Favor de adjuntar archivo válido');
             e.preventDefault(); // Cancel the submit
             return false;
         } else {
             $('#Loading').show();
+            $('#txtArea').empty();
+            $('#txtArea').html('');
+            debugger
+            // Get form
+            var form = $('#fileUploadForm')[0];
+
+            // Create an FormData object
+            var data = new FormData(form);
+
+            $("#idButton").prop("disabled", true);
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '@Url.Action("OCRVerification", "OCR")',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+
+                success: function (response) {
+                    debugger
+                    $("#idButton").prop("disabled", false);
+
+                    $('#Loading').hide();
+
+                    var array = response;
+                    var textoCompleto = " ";
+
+                    for (var i = 0; i < array.length; i++) {
+                        textoCompleto += array[i] + " ";
+                    }
+
+                    $("#txtArea").val(textoCompleto);
+            },
+            error: function (er) {
+                alert("error");
+            }//
+        });//ajax
+
+
+
         }
     });
+
+
+    function OnSuccess(data) {
+        alert('HTTP Status Code: ' + data);
+    }
+    function OnFailure(data) {
+        alert('HTTP Status Code: ' + data);
+    }
+
+
 </script>
 
 <div class="row" align="center">
