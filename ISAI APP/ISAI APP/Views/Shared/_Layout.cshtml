@@ -11,6 +11,19 @@
     @Scripts.Render("~/bundles/jquery")
 
     @RenderSection("scripts", required: false)
+
+    <style type="text/css">
+        .Link {
+            color: white;
+            font-weight: bold;
+            -ms-flex-preferred-size: 80%;
+            flex-basis: 80%;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
@@ -25,10 +38,10 @@
                     <a class="nav-link" href="~/Views/Home/Index.cshtml">MENÚ PRINCIPAL<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">@Html.ActionLink("Documentos (OCR)", "OCR", "OCR", null, new { @class = "my-class" })</a>
+                    <a class="nav-link collapse" href="#">@Html.ActionLink("Documentos (OCR)", "OCR", "OCR", null, new { @class = "Link" })</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">@Html.ActionLink("Validar Imagenes", "Index", "FindCropValidate", null, new { @class = "my-class" })</a>
+                    <a class="nav-link collapse" href="#" tabindex="-1" aria-disabled="true">@Html.ActionLink("Validar Imagenes", "Index", "FindCropValidate", null, new { @class = "Link" })</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
