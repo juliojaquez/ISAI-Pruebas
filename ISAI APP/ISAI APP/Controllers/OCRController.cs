@@ -1,4 +1,5 @@
-﻿using ISAI_APP.OCR;
+﻿using ISAI_APP.Models.DTOS;
+using ISAI_APP.OCR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,30 @@ namespace ISAI_APP.Controllers
         {
             List<string> palabras = await OCRUtil.GetText(file);
 
-            return Json(palabras, JsonRequestBehavior.AllowGet);
+            ObjOcr objOcr = FindCampos(palabras);
 
+            return Json(objOcr, JsonRequestBehavior.AllowGet);
+
+        }
+
+        private static ObjOcr FindCampos(List<string> palabras)
+        {
+            ObjOcr ocr = new ObjOcr();
+
+            var result0 = palabras.Where(x => x.Contains("NOMBRE")).ToArray();
+            var result1 = palabras.Where(x => x.Contains("CURP")).ToArray();
+
+            int index = palabras.IndexOf(result0[0]);
+            int indexCurp = palabras.IndexOf(result1[0]);
+
+            ocr.TextoCompleto = palabras.ToArray();
+            ocr.ApellidoPat = palabras[index + 1];
+            ocr.ApellidoMat = palabras[index + 2];
+            ocr.Nombre = palabras[index + 3];
+            ocr.Curp = palabras[indexCurp + 1];
+
+
+            return ocr;
         }
     }
 }

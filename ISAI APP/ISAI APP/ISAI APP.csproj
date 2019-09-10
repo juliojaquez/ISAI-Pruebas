@@ -144,6 +144,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBaseJulio.cs" />
+    <Compile Include="Models\DTOS\objOcr.cs" />
     <Compile Include="Models\INEData.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="OCR\OCR.cs" />

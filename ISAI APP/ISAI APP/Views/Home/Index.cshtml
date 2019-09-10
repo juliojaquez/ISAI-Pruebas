@@ -1,41 +1,83 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+<script src="~/Scripts/sweet-alert.js"></script>
+<link rel="stylesheet" href="~/Content/sweetalert/sweet-alert.css">
+
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">Validar Documento (OCR)</h5>
+        <p class="card-text">Sube su INE por la parte de enfrente.</p>
+        <div class="col-md-10 col-md-push-2">
+            <section>
+
+                @using (Html.BeginForm("OCRVerification", "OCR", FormMethod.Post, new { id = "fileUploadForm" }))
+                {
+                    <div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row form-group">
+                                    <input type="file" id="idFileDocumento" name="file" class="form-control" data-classButton="btn btn-primary" placeholder="Sube imagen">
+                                    <hr />
+                                </div>
+                                <div class="row form-group">
+                                    <input type="submit" id="idButton" class="btn btn-primary" value="Revisar Imagen" />
+                                    <div id="Loading" class="col-md-2" style="display: none;">
+                                        <img src="~/Content/ImagesApp/loading.gif" width="50" height="50" alt="Loading...">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </section>
+            <div class="row">
+                <div class="col-lg-12">
+                    <textarea id="txtArea" name="textarea" class="container" rows="10" cols="100">...</textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
 <div class="row">
     <div class="col-md-12">
         <form method="post">
             <div class="form-group">
-                <label for="txtName">Name:</label>
-                <input id="txtName" type="text" class="form-control col-md-12" placeholder="Nombre" title="Nombre" value="Ulises" />
+                <label for="txtName">Nombre:</label>
+                <input id="txtName" class="form-control col-md-12" title="Nombre" value="" disabled />
             </div>
             <div class="form-group">
-                <label for="txtName">FirstName::</label>
-                <input id="txtFirstName" name="firstName" type="text" class="form-control col-md-12" placeholder="Apellido Materno" title="Apellido Paterno" value="Gonzalez" />
+                <label for="txtName">Apellido Paterno:</label>
+                <input id="txtApellidoPat" name="firstName" type="text" class="form-control col-md-12" title="Apellido Paterno" value="" disabled />
             </div>
             <div class="form-group">
-                LastName: <input id="txtLastName" name="lastName" type="text" class="form-control col-md-12" placeholder="Apellido Paterno" title="Apellido Materno" value="Juarez" />
+                Apellido Materno: <input id="txtApellidoMat" name="lastName" type="text" class="form-control col-md-12" title="Apellido Materno" value="" disabled />
             </div>
 
             <div class="form-group">
-                CURP: <input id="txtCURP" name="curp" type="text" class="form-control col-md-12" placeholder="CURP" title="CURP" value="GOJU950519" />
+                CURP: <input id="txtCURP" name="curp" type="text" class="form-control col-md-12" title="CURP" value="" disabled />
             </div>
             <div class="form-group">
-                DateTime: <input id="txtFechaNacimiento" name="fechaNacimiento" type="text" class="form-control col-md-12" title="Fecha de Nacimiento" value="19-05-2019" />
+                Hora: <input id="txtFechaNacimiento" name="fechaNacimiento" type="text" class="form-control col-md-12" title="Fecha de Nacimiento" value="" disabled />
                 <div id="Console"></div>
             </div>
-            <div class="form-group" >
+            <div class="form-group">
                 <a class="btn btn-success btn-block" href="/FindCropValidate">Siguiente</a>
-                @*<button class="btn btn-outline-dark container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "FindCropValidate")</button>*@
+
             </div>
 
         </form>
     </div>
 </div>
-<h2>
-    <!--Resultado: name: @ViewBag.name, firstName: @ViewBag.FirstName, lastName: @ViewBag.LastName, CURP: @ViewBag.CURP, fechaNacimiento: @ViewBag.FechaNacimiento-->
-</h2>
-<h3>@ViewBag.Resultado</h3>
 <script>
+
 function AddZero(num) {
     return (num >= 0 && num < 10) ? "0" + num : num + "";
 }
@@ -51,8 +93,75 @@ window.onload = function() {
     document.getElementById("Console").innerHTML = "Now: " + strDateTime;
     };
 
+    $("#idButton").click(function (e) {
+        if ($('#idFileDocumento').get(0).files.length === 0) {
+            Swal.fire({
+                type: 'error',
+                title: 'Elige un formato válido de imagen.'
+            })
+            e.preventDefault(); // Cancel the submit
+            return false;
+        } else {
+            $('#Loading').show();
+            $('#txtArea').empty();
+            $('#txtArea').html('');
+            debugger
+            // Get form
+            var form = $('#fileUploadForm')[0];
 
-    var name = $('#txtName').val();
+            // Create an FormData object
+            var data = new FormData(form);
+
+            $("#idButton").prop("disabled", true);
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: '@Url.Action("OCRVerification", "OCR")',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+
+                success: function (response) {
+                    debugger
+
+                    if (response == null) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error al procesar imagen'
+                        })
+
+                        return;
+                    }
+
+                    $("#idButton").prop("disabled", false);
+
+                    $('#Loading').hide();
+
+                    var arrayTextoCompleto = response.TextoCompleto;
+                    var textoCompleto = "";
+
+                    for (var i = 0; i < arrayTextoCompleto.length; i++) {
+                        textoCompleto += arrayTextoCompleto[i] + " ";
+                    }
+
+                    $("#txtArea").val(textoCompleto);
+                    $("#txtName").val(response.Nombre);
+                    $("#txtApellidoPat").val(response.ApellidoPat);
+                    $("#txtApellidoMat").val(response.ApellidoMat);
+                    $("#txtCURP").val(response.Curp);
+                    
+            },
+            error: function (er) {
+                alert("error");
+            }//
+        });//ajax
+        }
+    });
+
+
+    @*var name = $('#txtName').val();
     var firstName = $('#txtFirstName').val();
     var lastName = $('#txtLastName').val();
     var fechaNacimiento = $('#txtFechaNacimiento').val();
@@ -71,5 +180,5 @@ window.onload = function() {
 
             }//
 
-        });
+        });*@
 </script>
