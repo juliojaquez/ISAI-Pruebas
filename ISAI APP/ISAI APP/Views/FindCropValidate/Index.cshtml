@@ -3,6 +3,9 @@
     ViewBag.Title = "Index";
 }
 
+<script src="~/Scripts/sweet-alert.js"></script>
+<link rel="stylesheet" href="~/Content/sweetalert/sweet-alert.css">
+
 <h2>Find, Crop & Validate</h2>
 
 <hr />
@@ -24,29 +27,27 @@
                             <div class="input-group">
                                 <h4>Ingresa INE</h4>
                             </div>
-                            <div class="row form-group">
+                            <div class="form-group">
                                 <input type="file" id="idFile" name="file" class="form-control">
-                                <hr />
-
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6 form-group">
-                                    <input type="radio" id="INE" name="choose" value="INE" checked />
-                                    <label for="INE"><strong>INE (buscar firma en reverso)</strong></label>
-                                </div>
-                                <div class="col-lg-6 form-group">
-                                    <input type="radio" id="DOCUMENTO" name="choose" value="DOCUMENTO" />
-                                    <label for="DOCUMENTO"><strong>DOCUMENTO (buscar sello del escudo mexicano)</strong></label>
-                                </div>
+                            <div class="form-group">
+                                <input type="radio" id="INE" name="choose" value="INE" checked />
+                                <label for="INE"><strong>INE (buscar firma en reverso)</strong></label>
                             </div>
-                            <div class="row form-group">
+                            <div class="form-group">
 
-                                <input type="submit" id="idButton" class="btn btn-danger" value="Verificar" />
-
-
+                                <input type="radio" id="DOCUMENTO" name="choose" value="DOCUMENTO" />
+                                <label for="DOCUMENTO"><strong>DOCUMENTO (buscar sello del escudo mexicano)</strong></label>
+                            </div>
+                            <div class="form-group">
+                                <button id="idButtonVerificar" type="submit" class="btn btn-info btn-block">Verificar</button>
                                 <div id="Loading" class="col-md-2" style="display: none;">
                                     <img src="~/Content/ImagesApp/loading.gif" width="50" height="50" alt="Loading...">
                                 </div>
+                            </div>
+                            <hr />
+                            <div class="form-group mx-auto">
+                                <a href="/Home" class="btn btn-danger col-md-6" style="text-decoration:none">Regresar</a>
                             </div>
 
                         </div>
@@ -60,9 +61,12 @@
 
 
 <script>
-    $("#idButton").click(function (e) {
+    $("#idButtonVerificar").click(function (e) {
         if ($('#idFile').get(0).files.length === 0) {
-            alert('Favor de adjuntar archivo válido');
+            Swal.fire({
+                type: 'error',
+                title: 'Elige un formato válido de imagen.'
+            })
             e.preventDefault(); // Cancel the submit
             return false;
         } else {
@@ -71,8 +75,4 @@
     });
 </script>
 
-<div class="row" align="center">
-    <div class="col-5">
-        <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
-    </div>
-</div>
+

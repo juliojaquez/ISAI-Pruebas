@@ -24,8 +24,9 @@
                 DateTime: <input id="txtFechaNacimiento" name="fechaNacimiento" type="text" class="container" title="Fecha de Nacimiento" value="19-05-2019" />
                 <div id="Console"></div>
             </div>
-            <div class="form-group">
-                <button class="btn btn-outline-dark container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "FindCropValidate")</button>
+            <div class="form-group" >
+                <a class="btn btn-success btn-block" href="/FindCropValidate">Siguiente</a>
+                @*<button class="btn btn-outline-dark container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "FindCropValidate")</button>*@
             </div>
 
         </form>

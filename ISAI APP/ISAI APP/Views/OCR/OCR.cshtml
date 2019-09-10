@@ -3,10 +3,13 @@
     ViewBag.Title = "OCR";
 }
 
+<script src="~/Scripts/sweet-alert.js"></script>
+<link rel="stylesheet" href="~/Content/sweetalert/sweet-alert.css">
+
 <div class="card text-center">
     <div class="card-body">
         <h5 class="card-title">Validar Documento (OCR)</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text">Sube una imagen para extraer su texto.</p>
 
 
         <div class="col-md-10 col-md-push-2">
@@ -40,16 +43,19 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
+
 </div>
 
 
 <script>
     $("#idButton").click(function (e) {
         if ($('#idFileDocumento').get(0).files.length === 0) {
-            alert('Favor de adjuntar archivo válido');
+            Swal.fire({
+                type: 'error',
+                title: 'Elige un formato válido de imagen.'
+            })
             e.preventDefault(); // Cancel the submit
             return false;
         } else {
