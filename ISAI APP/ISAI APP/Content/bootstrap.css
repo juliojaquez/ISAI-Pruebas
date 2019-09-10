@@ -50,7 +50,7 @@ a.my-class {
     }
 
     a.my-class:visited {
-        color: #CCCCCC
+        color: #FFFFFF
     }
 *::after {
   box-sizing: border-box;
