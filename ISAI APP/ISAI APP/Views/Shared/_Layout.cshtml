@@ -25,10 +25,10 @@
                     <a class="nav-link" href="~/Views/Home/Index.cshtml">MENÚ PRINCIPAL<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">CASAS</a>
+                    <a class="nav-link" href="#">@Html.ActionLink("Documentos (OCR)", "Index", "FindCropValidate", null, new { @class = "my-class" })</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">PAGOS</a>
+                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">@Html.ActionLink("Validar Imagenes", "Index", "FindCropValidate", null, new { @class = "my-class" })</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

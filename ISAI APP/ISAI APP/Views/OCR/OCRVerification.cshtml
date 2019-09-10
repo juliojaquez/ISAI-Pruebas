@@ -1,0 +1,42 @@
+﻿@{
+    /**/
+
+
+    ViewBag.Title = "OCR";
+}
+
+<h2>Revisión de Documento (OCR)</h2>
+<hr />
+
+@if (ViewBag.isNull == "true")
+{
+    <div class="row">
+        <h4><span class="badge badge-dan">Archivo no valido para su lectura con OCR.</span></h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-info col-md-12" href="~/Views/OCR/OCR.cshtml">Volver</a>
+        </div>
+    </div>
+}
+else
+{
+
+    <div class="col-md-12">
+        <textarea class="container" name="textarea" rows="10" cols="100">...</textarea>
+    </div>
+
+    <div class="row" align="center">
+        <div class="col-5 container">
+            <button class="btn btn-danger container" type="submit">@Html.ActionLink("<<Regresar", "Index", "Home", null, new { @class = "my-class" })</button>
+        </div>
+
+        <div class="col-5 container">
+            <button class="btn btn-success container" type="submit">@Html.ActionLink("Siguiente>>", "Index", "Home", null, new { @class = "my-class" })</button>
+        </div>
+    </div>
+
+}@{
+    ViewBag.Title = "FileVerification";
+}
+
