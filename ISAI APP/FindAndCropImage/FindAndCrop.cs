@@ -55,16 +55,11 @@ namespace FindAndCropImage
                     imagenFirma = CropImage(img, match, ref RutaUrl);
                     imageToShow.Draw(match, new Bgr(Color.Red), 3);
                     a = imagenFirma.ToBitmap();
-
-                    //Image b = imageToShow.ToJpegData();
                 }
             }
 
 
             return a;
-            // Show imageToShow in an ImageBox (here assumed to be called imageBox1)
-            //imageBox1.Image = imageToShow;
-            //imageBox2.Image = imagenFirma;
         }
 
         public static Image<Bgr, byte> CropImage(Image source, Rectangle crop, ref string _rutaUrl)
@@ -77,12 +72,6 @@ namespace FindAndCropImage
                 {
                     gr.DrawImage(source, new Rectangle(0, 0, bmp.Width, bmp.Height), crop, GraphicsUnit.Pixel);
                 }
-
-                //string nombreImagen = "imagen" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
-                //_rutaUrl = @"../ISAI APP/Content/images/" + nombreImagen;
-
-
-                //bmp.Save(_rutaUrl);
                 myImage = new Image<Bgr, Byte>(bmp);
             }
             catch (Exception e)
