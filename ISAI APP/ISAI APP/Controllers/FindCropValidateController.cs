@@ -104,42 +104,21 @@ namespace ISAI_APP.Controllers
                 {
                     ViewBag.IsNull = "true";
                 }
-
-
-
-
             }
             catch (Exception e)
             {
                 objLog.Error = "Hubo error cortando la imagen o guardandola" + e.Message + "\nInner" + e.InnerException;
                 DataBase.Logs.Add(objLog);
                 DataBase.SaveChanges();
+                if (e.Message.ToString() == "OpenCV: Bad input roi")
+                {
+                    ViewBag.IsNull = "true";
+                    ViewBag.MensajeError = "Imagen demasiado pequeña para procesarse, favor de verificar";
+                    
+                }
+                
             }
-            /*end modulo de pruebas*/
 
-            //System.Drawing.Bitmap bmpPostedImage = new System.Drawing.Bitmap(file.InputStream);
-            //var galleryDirectoryPath1 = Server.MapPath("~/Content/imagesUploads/");
-
-
-            //var imgToSave = FindAndCrop.FindCrop(bmpPostedImage);
-
-            //if (imgToSave != null)
-            //{
-            //    var galleryDirectoryPath = Server.MapPath("~/Content/imagesCrop/");
-            //    string nombreImagen = "imagen" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
-            //    imgToSave.Save(galleryDirectoryPath + nombreImagen);
-
-            //    ViewBag.Url = nombreImagen;
-            //    ViewBag.Url2 = file.FileName;
-
-            //    var Lista = Score(nombreImagen);
-
-            //    ViewBag.Lista = Lista;
-            //}
-            //else
-            //{
-            //    ViewBag.IsNull = "true";
-            //}
             return View();
         }
 

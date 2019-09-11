@@ -70,7 +70,6 @@
             </div>
             <div class="form-group">
                 <a class="btn btn-success btn-block" href="/FindCropValidate">Siguiente</a>
-
             </div>
 
         </form>
@@ -155,7 +154,7 @@ window.onload = function() {
                     type: 'error',
                     title: 'Error al buscar información en INE, favor de verificar la imagen.'
                 })
-
+                $("#idButton").prop("disabled", false);
                 $('#Loading').hide();
             }//
         });//ajax
