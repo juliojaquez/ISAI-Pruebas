@@ -43,14 +43,25 @@ namespace ISAI_APP.Controllers
                 var result0 = palabras.Where(x => x.Contains("NOMBRE")).ToArray();
                 var result1 = palabras.Where(x => x.Contains("CURP")).ToArray();
 
-                int index = palabras.IndexOf(result0[0]);
-                int indexCurp = palabras.IndexOf(result1[0]);
+                //Seccion nombre
+                if (result0.Length > 0)
+                {
+                    int index = palabras.IndexOf(result0[0]);
+                    ocr.ApellidoPat = palabras[index + 1];
+                    ocr.ApellidoMat = palabras[index + 2];
+                    ocr.Nombre = palabras[index + 3];
+                }
+                //Seccion curp
+                if (result1.Length > 0)
+                {
+                    int indexCurp = palabras.IndexOf(result1[0]);
+                    ocr.Curp = palabras[indexCurp + 1];
+                }
+
 
                 ocr.TextoCompleto = palabras.ToArray();
-                ocr.ApellidoPat = palabras[index + 1];
-                ocr.ApellidoMat = palabras[index + 2];
-                ocr.Nombre = palabras[index + 3];
-                ocr.Curp = palabras[indexCurp + 1];
+
+
 
                 INEData objLog = new INEData();
                 objLog.name = ocr.Nombre;
