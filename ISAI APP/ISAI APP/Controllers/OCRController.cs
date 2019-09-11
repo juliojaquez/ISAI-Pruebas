@@ -26,6 +26,7 @@ namespace ISAI_APP.Controllers
             if (fromPrincipal != null)
             {
                 ObjOcr objOcr = FindCampos(palabras);
+                return Json(objOcr, JsonRequestBehavior.AllowGet);
             }
 
 
