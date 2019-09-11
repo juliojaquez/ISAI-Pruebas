@@ -71,6 +71,7 @@ namespace ISAI_APP.Controllers
                 //objLog.sectionNumber = 4;
                 //objLog.validUntil = 2023;
                 //objLog.codeElector = "GOJDGDGGGS2";
+                objLog.registerDate = DateTime.Now;
 
                 DataBase.INELogs.Add(objLog);
                 DataBase.SaveChanges();

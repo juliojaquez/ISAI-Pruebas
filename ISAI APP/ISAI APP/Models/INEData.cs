@@ -36,5 +36,6 @@ namespace ISAI_APP.Models
         public int locationNumber { get; set; }
         public int sectionNumber { get; set; }
         public int validUntil { get; set; }
+        public DateTime registerDate { get; set; }
     }
 }
