@@ -111,6 +111,7 @@ window.onload = function() {
 
             // Create an FormData object
             var data = new FormData(form);
+            data.append('isPrincipal', '1');
 
             $("#idButton").prop("disabled", true);
 
@@ -127,11 +128,7 @@ window.onload = function() {
                     debugger
 
                     if (response == null) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error al procesar imagen'
-                        })
-
+                        Swal.fire({type: 'error',title: 'Error al procesar imagen'})
                         return;
                     }
 
@@ -151,10 +148,15 @@ window.onload = function() {
                     $("#txtApellidoPat").val(response.ApellidoPat);
                     $("#txtApellidoMat").val(response.ApellidoMat);
                     $("#txtCURP").val(response.Curp);
-                    
+
             },
             error: function (er) {
-                alert("error");
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error al buscar información en INE, favor de verificar la imagen.'
+                })
+
+                $('#Loading').hide();
             }//
         });//ajax
         }

@@ -20,11 +20,16 @@ namespace ISAI_APP.Controllers
         public async Task<ActionResult> OCRVerification(HttpPostedFileBase file)
         {
             List<string> palabras = await OCRUtil.GetText(file);
+            string fromPrincipal = Request["isPrincipal"];
 
-            ObjOcr objOcr = FindCampos(palabras);
+            if (fromPrincipal != null)
+            {
+                ObjOcr objOcr = FindCampos(palabras);
+                return Json(objOcr, JsonRequestBehavior.AllowGet);
+            }
 
-            return Json(objOcr, JsonRequestBehavior.AllowGet);
 
+            return Json(palabras, JsonRequestBehavior.AllowGet);
         }
 
         private static ObjOcr FindCampos(List<string> palabras)
