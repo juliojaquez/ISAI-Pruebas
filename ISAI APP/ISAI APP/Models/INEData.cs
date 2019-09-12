@@ -38,6 +38,8 @@ namespace ISAI_APP.Models
         public int validUntil { get; set; }
         public string textComplete { get; set; }
         public string[] textCompleto { get; set; }
+        public byte resultEnvironment { get; set; }
+        public string typeEnvironment { get; set; }
         public DateTime registerDate { get; set; }
     }
 }

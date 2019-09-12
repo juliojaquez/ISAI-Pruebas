@@ -32,17 +32,14 @@ namespace ISAI_APP.Controllers
             return Json(palabras, JsonRequestBehavior.AllowGet);
         }
 
-        private static INEData FindCampos(List<string> palabras)
+        private static INEData EscenarioUno(List<string> palabras)
         {
-            DataBaseJulio DataBase = new DataBaseJulio();
-            string textoPlano = String.Empty;
             try
             {
                 INEData ocr = new INEData();
-
+                string textoPlano = String.Empty;
                 var result0 = palabras.Where(x => x.Contains("NOMBRE")).ToArray();
                 var result1 = palabras.Where(x => x.Contains("CURP")).ToArray();
-
                 //Seccion nombre
                 if (result0.Length > 0)
                 {
@@ -57,42 +54,111 @@ namespace ISAI_APP.Controllers
                     int indexCurp = palabras.IndexOf(result1[0]);
                     ocr.CURP = palabras[indexCurp + 1];
                 }
-
+                //Seccion TextoArea
                 ocr.textCompleto = palabras.ToArray();
-
                 foreach (var texto in palabras.ToArray())
                 {
                     textoPlano = textoPlano + " " + texto;
                 }
+                ocr.textComplete = textoPlano;
 
 
-
-                INEData objLog = new INEData();
-                objLog.name = ocr.name;
-                objLog.firstName = ocr.firstName;
-                objLog.lastName = ocr.lastName;
-                //objLog.home = "Av. de la Finca";
-                //objLog.age = 24;
-                //objLog.sex = "H";
-                //objLog.code = 80050;
-                //objLog.stateRepublic = "Puebla";
-                //objLog.stateNumber = 1;
-                //objLog.folio = 222223;
-                //objLog.registerYear = 2012;
-                objLog.CURP = ocr.CURP;
-                //objLog.stateNumber = 12;
-                //objLog.municipalityNumber = 3;
-                //objLog.locationNumber = 23;
-                //objLog.sectionNumber = 4;
-                //objLog.validUntil = 2023;
-                //objLog.codeElector = "GOJDGDGGGS2";
-                objLog.registerDate = DateTime.Now;
-                objLog.textComplete = textoPlano;
-
-                DataBase.INELogs.Add(objLog);
-                DataBase.SaveChanges();
+                if (ocr.firstName != null && ocr.lastName != null && ocr.name != null && ocr.textComplete != null)
+                {
+                    ocr.resultEnvironment = 1;
+                    ocr.typeEnvironment = "Escenario 1";
+                }
+                else
+                {
+                    ocr.resultEnvironment = 0;
+                    ocr.typeEnvironment = "No Funciono";
+                }
                 return ocr;
             }
+            catch(Exception e)
+            {
+                e.Message.ToString();
+                return null;
+            }
+        }
+
+        private static INEData EscenarioDos(List<string> palabras)
+        {
+            try
+            {
+                INEData ocr = new INEData();
+                string textoPlano = String.Empty;
+                var result0 = palabras.Where(x => x.Contains("Ca")).ToArray();
+                var result1 = palabras.Where(x => x.Contains("III")).ToArray();
+                //Seccion nombre
+                if (result0.Length > 0)
+                {
+                    int index = palabras.IndexOf(result0[0]);
+                    ocr.firstName = palabras[index + 1];
+                    ocr.lastName = palabras[index + 2];
+                    ocr.name = palabras[index + 3];
+                }
+                //Seccion curp
+                if (result1.Length > 0)
+                {
+                    int indexCurp = palabras.IndexOf(result1[0]);
+                    ocr.CURP = palabras[indexCurp + 1];
+                }
+                //Seccion TextoArea
+                ocr.textCompleto = palabras.ToArray();
+                foreach (var texto in palabras.ToArray())
+                {
+                    textoPlano = textoPlano + " " + texto;
+                }
+                ocr.textComplete = textoPlano;
+
+
+                if (ocr.firstName != null && ocr.lastName != null && ocr.name != null && ocr.textComplete != null)
+                {
+                    ocr.resultEnvironment = 1;
+                    ocr.typeEnvironment = "Escenario 2";
+                }
+                else
+                {
+                    ocr.resultEnvironment = 0;
+                    ocr.typeEnvironment = "No funciono";
+                }
+                return ocr;
+            }
+            catch (Exception e)
+            {
+                e.Message.ToString();
+                return null;
+            }
+        }
+
+        private static INEData FindCampos(List<string> palabras)
+        {
+            DataBaseJulio DataBase = new DataBaseJulio();
+            INEData objOcr = new INEData();
+            objOcr = EscenarioUno(palabras);
+            try
+            {
+                if (objOcr.resultEnvironment == 1)
+                {
+                    objOcr.registerDate = DateTime.Now;
+                    DataBase.INELogs.Add(objOcr);
+                    DataBase.SaveChanges();
+                    return objOcr;
+            }
+                else if (EscenarioDos(palabras).resultEnvironment == 1)
+            {
+                objOcr = EscenarioDos(palabras);
+                objOcr.registerDate = DateTime.Now;
+                DataBase.INELogs.Add(objOcr);
+                DataBase.SaveChanges();
+                return objOcr;
+            }
+            else
+            {
+                return null;
+            }
+        }
             catch (Exception e)
             {
                 e.Message.ToString();
