@@ -134,18 +134,18 @@ window.onload = function() {
 
                     $('#Loading').hide();
 
-                    var arrayTextoCompleto = response.TextoCompleto;
+                    var arrayTextoCompleto = response.textCompleto;
                     var textoCompleto = "";
 
                     for (var i = 0; i < arrayTextoCompleto.length; i++) {
                         textoCompleto += arrayTextoCompleto[i] + " ";
                     }
 
-                    $("#txtArea").val(textoCompleto);
-                    $("#txtName").val(response.Nombre);
-                    $("#txtApellidoPat").val(response.ApellidoPat);
-                    $("#txtApellidoMat").val(response.ApellidoMat);
-                    $("#txtCURP").val(response.Curp);
+                    $("#txtArea").val(response.textCompleto);
+                    $("#txtName").val(response.name);
+                    $("#txtApellidoPat").val(response.firstName);
+                    $("#txtApellidoMat").val(response.lastName);
+                    $("#txtCURP").val(response.CURP);
 
             },
             error: function (er) {
