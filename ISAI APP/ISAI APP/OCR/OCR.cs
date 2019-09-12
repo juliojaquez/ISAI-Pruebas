@@ -18,11 +18,6 @@ namespace ISAI_APP.OCR
 
         public static async Task<List<string>> GetText(HttpPostedFileBase file)
         {
-            //string imagesDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            //string mainFolder = imagesDirectory + "Content\\documents\\ife-julio.jpg";
-
-            
-
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", skey);
 
