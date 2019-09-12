@@ -1,5 +1,4 @@
 ﻿using ISAI_APP.Models;
-using ISAI_APP.Models.DTOS;
 using ISAI_APP.OCR;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace ISAI_APP.Controllers
 
             if (fromPrincipal != null)
             {
-                ObjOcr objOcr = FindCampos(palabras);
+                INEData objOcr = FindCampos(palabras);
                 return Json(objOcr, JsonRequestBehavior.AllowGet);
             }
 
@@ -33,12 +32,13 @@ namespace ISAI_APP.Controllers
             return Json(palabras, JsonRequestBehavior.AllowGet);
         }
 
-        private static ObjOcr FindCampos(List<string> palabras)
+        private static INEData FindCampos(List<string> palabras)
         {
             DataBaseJulio DataBase = new DataBaseJulio();
+            string textoPlano = String.Empty;
             try
             {
-                ObjOcr ocr = new ObjOcr();
+                INEData ocr = new INEData();
 
                 var result0 = palabras.Where(x => x.Contains("NOMBRE")).ToArray();
                 var result1 = palabras.Where(x => x.Contains("CURP")).ToArray();
@@ -47,26 +47,30 @@ namespace ISAI_APP.Controllers
                 if (result0.Length > 0)
                 {
                     int index = palabras.IndexOf(result0[0]);
-                    ocr.ApellidoPat = palabras[index + 1];
-                    ocr.ApellidoMat = palabras[index + 2];
-                    ocr.Nombre = palabras[index + 3];
+                    ocr.firstName = palabras[index + 1];
+                    ocr.lastName = palabras[index + 2];
+                    ocr.name = palabras[index + 3];
                 }
                 //Seccion curp
                 if (result1.Length > 0)
                 {
                     int indexCurp = palabras.IndexOf(result1[0]);
-                    ocr.Curp = palabras[indexCurp + 1];
+                    ocr.CURP = palabras[indexCurp + 1];
                 }
 
+                ocr.textCompleto = palabras.ToArray();
 
-                ocr.TextoCompleto = palabras.ToArray();
+                foreach (var texto in palabras.ToArray())
+                {
+                    textoPlano = textoPlano + " " + texto;
+                }
 
 
 
                 INEData objLog = new INEData();
-                objLog.name = ocr.Nombre;
-                objLog.firstName = ocr.ApellidoPat;
-                objLog.lastName = ocr.ApellidoMat;
+                objLog.name = ocr.name;
+                objLog.firstName = ocr.firstName;
+                objLog.lastName = ocr.lastName;
                 //objLog.home = "Av. de la Finca";
                 //objLog.age = 24;
                 //objLog.sex = "H";
@@ -75,7 +79,7 @@ namespace ISAI_APP.Controllers
                 //objLog.stateNumber = 1;
                 //objLog.folio = 222223;
                 //objLog.registerYear = 2012;
-                objLog.CURP = ocr.Curp;
+                objLog.CURP = ocr.CURP;
                 //objLog.stateNumber = 12;
                 //objLog.municipalityNumber = 3;
                 //objLog.locationNumber = 23;
@@ -83,6 +87,7 @@ namespace ISAI_APP.Controllers
                 //objLog.validUntil = 2023;
                 //objLog.codeElector = "GOJDGDGGGS2";
                 objLog.registerDate = DateTime.Now;
+                objLog.textComplete = textoPlano;
 
                 DataBase.INELogs.Add(objLog);
                 DataBase.SaveChanges();
@@ -90,6 +95,7 @@ namespace ISAI_APP.Controllers
             }
             catch (Exception e)
             {
+                e.Message.ToString();
                 return null;
             }
         }
